@@ -55,8 +55,10 @@ def summarize(tasks: list[dict[str, str]], lanes: list[str], states: list[str],
     cols = [*states, OTHER]
     counts = {lane: dict.fromkeys(cols, 0) for lane in rows}
     for task in tasks:
-        lane = task.get("lane") if task.get("lane") in lanes else OTHER
-        state = task.get("state") if task.get("state") in states else OTHER
+        lane = task.get("lane")
+        lane = lane if lane in lanes else OTHER
+        state = task.get("state")
+        state = state if state in states else OTHER
         counts[lane][state] += 1
     if not any(counts[OTHER].values()):
         rows.remove(OTHER)
