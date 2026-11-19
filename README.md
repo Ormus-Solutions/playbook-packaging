@@ -46,6 +46,11 @@ those have their own standards.
 
 ### Hand it to your agent
 
+```bash
+git clone https://github.com/Ormus-Solutions/playbook-packaging
+cd playbook-packaging
+```
+
 Clone this repo, open your coding agent (Claude Code, Codex, Grok) inside the
 clone, and paste this. Change PROJECT to the folder of what you built and SLUG
 to a short name for it:
