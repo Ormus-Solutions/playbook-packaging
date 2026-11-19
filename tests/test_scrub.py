@@ -225,16 +225,27 @@ class GitTest(unittest.TestCase):
         self.assertEqual(done.returncode, 1)
         self.assertRegex(done.stdout, r"(?m)^history [0-9a-f]+: deny-list entry 1$")
 
-    def test_a_personal_author_email_is_a_warning(self) -> None:
+    def test_a_personal_author_email_is_a_finding(self) -> None:
         with Folder() as folder:
             git(folder, "init", "-q")
             (folder / "notes.md").write_text("hello\n", encoding="utf-8")
             git(folder, "add", ".")
             git(folder, "-c", "user.email=dev" + AT + "acme-mail.io", "commit", "-q", "-m", "first")
             done = scrub(folder)
-        self.assertEqual(done.returncode, 0, done.stdout)
-        self.assertIn("1 commit carries an author or committer e-mail", done.stderr)
+        self.assertEqual(done.returncode, 1, done.stdout)
+        self.assertIn("history: 1 commit carries an author or committer e-mail", done.stdout)
         self.assertNotIn("acme-mail", done.stdout + done.stderr)
+
+    def test_a_noreply_author_email_passes(self) -> None:
+        with Folder() as folder:
+            git(folder, "init", "-q")
+            (folder / "notes.md").write_text("hello\n", encoding="utf-8")
+            git(folder, "add", ".")
+            git(folder, "-c", "user.email=12345+dev" + AT + "users.noreply.github.com",
+                "commit", "-q", "-m", "first")
+            done = scrub(folder)
+        self.assertEqual(done.returncode, 0, done.stdout)
+        self.assertNotIn("commit carries", done.stdout + done.stderr)
 
 
 class GitleaksTest(unittest.TestCase):

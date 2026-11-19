@@ -16,7 +16,7 @@ has the same shape, a reader learns it once.
 
 ## What it saved me
 
-Ormus asked for it in these words: "we need a playbook for how to package
+I asked for it in these words: "we need a playbook for how to package
 playbooks that everyone in the chat can use". The chat shares how its members
 work with coding agents. Without one shape, each share is a different kind of
 repo, and each reader has to work out how to run it. What this saves: the
@@ -51,12 +51,12 @@ clone, and paste this. Change PROJECT to the folder of what you built and SLUG
 to a short name for it:
 
 ```text
-Read PLAYBOOK.md in this repo and follow it to package my project in the
-folder PROJECT as a public playbook repo named playbook-SLUG. After each
-step, run its "Verify:" command and compare the result with "Expected:". If
-they differ, stop and tell me what you saw. Never push, create a repo or make
-one public without my yes. When you finish, run the "Done when" checks and
-show me their output.
+Read PLAYBOOK.md in this repo and follow it step by step to package my
+project in the folder PROJECT as a public playbook repo named playbook-SLUG.
+After each step, run its "Verify:" command and compare the result with
+"Expected:". If they differ, stop and tell me what you saw. Never push,
+create a repo or make one public without my yes. When you finish, run the
+"Done when" checks and show me their output.
 ```
 
 ### Do it by hand
@@ -70,7 +70,10 @@ show me their output.
 6. Fill `README.md`, `PLAYBOOK.md` and `LICENSE` until `./check.sh` prints
    `check: ok` and `python3 src/playbook_lint.py ../playbook-SLUG` prints
    `lint: ok`.
-7. Follow the publishing checklist below, then share it with the post format.
+7. Before the first commit, set a noreply e-mail in the new repo (GitHub:
+   Settings, Emails): `git config user.email 12345+you@users.noreply.github.com`.
+   The scrub stops on a commit with any other address.
+8. Follow the publishing checklist below, then share it with the post format.
 
 ## Preview
 
@@ -101,7 +104,7 @@ check: ok
    website, as a stranger would. Mistakes are cheap while nobody else can see
    it.
 2. **Scrub.** `./check.sh` must print `check: ok`. It runs the scrub on the
-   files, the file names and every commit. Then look at every picture
+   files, the file names, every commit and every commit's e-mail. Then look at every picture
    yourself: the scrub cannot read them.
 3. **A fresh-agent test.** Open a new agent session that has never seen your
    setup, in a fresh clone in a temp folder, and give it only the Quick start

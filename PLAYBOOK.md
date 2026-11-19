@@ -30,7 +30,7 @@ public and shared in the chat.
 
 ## Steps
 
-### 1. Run the demo on synthetic data
+### 1. Run the demo on the synthetic data
 
 This shows the whole process before anything on the machine changes.
 

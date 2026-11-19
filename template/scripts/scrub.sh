@@ -11,6 +11,7 @@
 #     (names ending in .local, .lan, .internal, .corp, .home.arpa)
 #   - home folders of a user (a path under /home, /Users or C:\Users)
 #   - every word of your deny-list (client names, machine names, people)
+#   - a commit whose author or committer e-mail is not a noreply address
 #
 # Where it looks: the files that would be published (in a git repo: the
 # tracked files plus the new ones that .gitignore does not hide), the file
@@ -315,11 +316,15 @@ def scan_history(root, denylist, findings, counts):
                 personal += 1
                 break
     if personal:
+        # A finding, not a warning: a public repo shows this address on every
+        # commit, so the gate must stop before it is published.
         what = "1 commit carries" if personal == 1 else f"{personal} commits carry"
-        warn(f"{what} an author or committer e-mail that is not a noreply "
-             "address, and a public repo shows it on every commit. Before you "
-             "publish, set a noreply address (GitHub: Settings, Emails) with "
-             "git config user.email, and start a fresh history.")
+        findings.append(f"history: {what} an author or committer e-mail that is "
+                        "not a noreply address (a public repo shows it on every "
+                        "commit). Set a noreply address (GitHub: Settings, Emails) "
+                        "with git config user.email, then rewrite the history: "
+                        "git rebase -r --root --exec 'git commit --amend --no-edit "
+                        "--reset-author'")
 
 
 def run_gitleaks(root, names, with_history):

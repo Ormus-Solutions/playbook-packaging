@@ -99,6 +99,8 @@ verification loop.
 
 - Secrets: keys, tokens, passwords, private keys, `.env` files (scrub).
 - E-mail addresses and phone numbers (scrub).
+- A commit whose author or committer e-mail is not a noreply address: a
+  public repo shows it on every commit (scrub).
 - Host names, IP addresses, Tailscale names and internal URLs (scrub).
 - Home paths that show a user name (scrub).
 - Client and company names, and people's names other than the author credit

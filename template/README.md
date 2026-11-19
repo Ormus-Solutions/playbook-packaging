@@ -64,4 +64,6 @@ The output of `bash examples/run.sh` on the synthetic data in `examples/`:
 
 ## Credits
 
-Made by <FILL: your name>. Packaged with playbook-packaging by Ormus (Ormus Solutions). MIT license.
+Made by <FILL: your name>. Packaged with
+[playbook-packaging](https://github.com/Ormus-Solutions/playbook-packaging)
+by Ormus (Ormus Solutions). MIT license.
