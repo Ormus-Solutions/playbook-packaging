@@ -315,9 +315,11 @@ def scan_history(root, denylist, findings, counts):
                 personal += 1
                 break
     if personal:
-        warn(f"{personal} commits carry an author or committer e-mail that is not "
-             "a noreply address; a public repo shows it on every commit "
-             "(see PLAYBOOK.md, Safety)")
+        what = "1 commit carries" if personal == 1 else f"{personal} commits carry"
+        warn(f"{what} an author or committer e-mail that is not a noreply "
+             "address, and a public repo shows it on every commit. Before you "
+             "publish, set a noreply address (GitHub: Settings, Emails) with "
+             "git config user.email, and start a fresh history.")
 
 
 def run_gitleaks(root, names, with_history):
@@ -385,9 +387,11 @@ def main(argv):
     sys.stdout.flush()  # our lines first, then what gitleaks prints
     leaks = run_gitleaks(root, names, with_history)
 
+    commits = counts["commits"]
+    history = (f"{commits} commit{'' if commits == 1 else 's'}" if with_history
+               else "not checked")
     summary = (f"{counts['files']} text files, deny-list: {len(denylist)} entries, "
-               f"history: {counts['commits'] if with_history else 'not checked'}"
-               f"{' commits' if with_history else ''}")
+               f"history: {history}")
     if findings or leaks:
         print(f"scrub: FAILED, {len(findings)} findings ({summary})")
         print("scrub: fix each one, or move the data out of the repo. A finding in "

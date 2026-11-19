@@ -233,7 +233,7 @@ class GitTest(unittest.TestCase):
             git(folder, "-c", "user.email=dev" + AT + "acme-mail.io", "commit", "-q", "-m", "first")
             done = scrub(folder)
         self.assertEqual(done.returncode, 0, done.stdout)
-        self.assertIn("1 commits carry an author or committer e-mail", done.stderr)
+        self.assertIn("1 commit carries an author or committer e-mail", done.stderr)
         self.assertNotIn("acme-mail", done.stdout + done.stderr)
 
 
