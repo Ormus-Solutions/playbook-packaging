@@ -1,0 +1,14 @@
+== 1. scripts/new.sh lane-counts playbook-lane-counts
+created: .git .gitignore CHANGELOG.md LICENSE PLAYBOOK.md README.md check.sh examples scripts src tests
+== 2. lint the fresh copy (it fails: placeholders are left)
+lint: playbook-lane-counts
+  README.md: 9 lines with a placeholder to fill (first: line 3)
+  PLAYBOOK.md: 12 lines with a placeholder to fill (first: line 10)
+  LICENSE: 1 line with a placeholder to fill (first: line 3)
+lint: 3 problems
+== 3. copy in the finished docs from examples/lane-counts/
+== 4. lint again
+lint: playbook-lane-counts
+lint: ok
+== 5. the new repo's own gate
+check: ok

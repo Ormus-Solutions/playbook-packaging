@@ -1,0 +1,13 @@
+# Python caches
+__pycache__/
+*.pyc
+.venv/
+
+# Local settings and secrets never go in the repo
+.env
+.env.*
+!.env.example
+
+# Editors and systems
+.DS_Store
+*.swp

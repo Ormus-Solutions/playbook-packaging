@@ -1,0 +1,6 @@
+# Example config. Copy it to ~/.config/playbook-{{slug}}/config.toml and change it.
+# The tool reads only this file for its settings: no hosts or paths in the code.
+
+title = "acme-web board"
+lanes = ["api", "web", "docs"]
+states = ["open", "done"]
